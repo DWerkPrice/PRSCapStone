@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace PRSCapStone.Models
 {
-    public class Product
-    {
+    public class Product {
         public int Id { get; set; }
         public string PartNbr { get; set; }
         public string Name { get; set; }
@@ -16,7 +15,10 @@ namespace PRSCapStone.Models
         public string PhotoPath { get; set; }
         public int? VendorId { get; set; }
 
-        public virtual Vendor Vendorr { get; set; }
+        public virtual Vendor Vendor { get; set; }
+
+        public virtual List<RequestLine> Requestlines {get; set;}
+
 
         
 

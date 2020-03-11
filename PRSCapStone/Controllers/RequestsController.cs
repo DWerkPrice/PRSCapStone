@@ -14,11 +14,42 @@ namespace PRSCapStone.Controllers
     [ApiController]
     public class RequestsController : ControllerBase
     {
-        private readonly EdDbContext _context;
+        public const string StatReview = "REVIEW";
+        public const string StatApproved = "APPROVED";
+        public const string StatRejected = "REJECTED";
+        
+        private readonly CsDb _context;
 
-        public RequestsController(EdDbContext context)
+        public RequestsController(CsDb context)
         {
             _context = context;
+        }
+ 
+        // post get all the records whose id is review
+        [HttpGet("returnstatreview")]
+        public async Task<ActionResult<IEnumerable<Request>>> GetStatReview() {
+            return await _context.Request.Where(x => x.Status == StatReview).ToListAsync();
+        }
+        //POST: set stat to review api/postreview/request
+        [HttpPost("setstattoreview")]
+        public Task<ActionResult<Request>> SetStatToReview(Request request) {
+            if (request.Total <= 50) {
+                request.Status = StatApproved;
+            } else {
+                request.Status = StatReview;
+            }
+            return PostRequest(request);
+        }
+        [HttpPost("setstattoapproved")]
+        public Task<ActionResult<Request>> SetStatToApproved(Request request) {
+            request.Status = StatApproved;
+            return PostRequest(request);
+        }
+        [HttpPost("setstattoreject")]
+        public Task<ActionResult<Request>> SetStatToReject(Request request) {
+            request.Status = StatApproved;
+            request.RejectionReason = "Because";
+            return PostRequest(request);
         }
 
         // GET: api/Requests

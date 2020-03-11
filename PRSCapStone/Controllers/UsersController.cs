@@ -14,14 +14,22 @@ namespace PRSCapStone.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly EdDbContext _context;
+        private readonly CsDb _context;
 
-        public UsersController(EdDbContext context)
+
+        public UsersController(CsDb context)
         {
             _context = context;
         }
-        
 
+
+      [HttpGet("login/{username}/{password}")]
+      public User Login(string username , string password) {
+        return _context.User.SingleOrDefault(u => u.Username == username && u.Password == password);
+      }
+ 
+
+       
 
         // GET: api/Users
         [HttpGet]

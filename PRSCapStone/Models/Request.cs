@@ -18,5 +18,8 @@ namespace PRSCapStone.Models
 
         public virtual User User { get; set; }
 
+        public virtual List<RequestLine> RequestLines { get; set; }
+
+        public Request() {  }
     }
 }

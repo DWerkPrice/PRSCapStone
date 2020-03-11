@@ -32,9 +32,9 @@ namespace PRSCapStone
         public void ConfigureServices(IServiceCollection services) {
             services.AddControllers();
 
-            services.AddDbContext<EdDbContext>(options => { 
+            services.AddDbContext<CsDb>(options => { 
                     options.UseLazyLoadingProxies();
-                    options.UseSqlServer(Configuration.GetConnectionString("EdDb"));
+                    options.UseSqlServer(Configuration.GetConnectionString("CsDb"));
             });
             services.AddCors(option =>
                 option.AddPolicy(DefaultCorsPolicy , x =>
@@ -57,7 +57,7 @@ namespace PRSCapStone
                 endpoints.MapControllers();
             });
             using var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
-            scope.ServiceProvider.GetService<EdDbContext>().Database.Migrate();
+            scope.ServiceProvider.GetService<CsDb>().Database.Migrate();
         }
     }
 }

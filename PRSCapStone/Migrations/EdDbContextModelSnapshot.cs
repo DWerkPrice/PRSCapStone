@@ -8,7 +8,7 @@ using PRSCapStone.Data;
 
 namespace PRSCapStone.Migrations
 {
-    [DbContext(typeof(EdDbContext))]
+    [DbContext(typeof(CsDb))]
     partial class EdDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -109,6 +109,33 @@ namespace PRSCapStone.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Requests");
+                });
+
+            modelBuilder.Entity("PRSCapStone.Models.RequestLine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
+
+                    b.Property<int>("RequestId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("RequestId");
+
+                    b.ToTable("RequestLines");
                 });
 
             modelBuilder.Entity("PRSCapStone.Models.User", b =>
@@ -219,7 +246,7 @@ namespace PRSCapStone.Migrations
 
             modelBuilder.Entity("PRSCapStone.Models.Product", b =>
                 {
-                    b.HasOne("PRSCapStone.Models.Vendor", "Vendorr")
+                    b.HasOne("PRSCapStone.Models.Vendor", "Vendor")
                         .WithMany()
                         .HasForeignKey("VendorId");
                 });
@@ -229,6 +256,21 @@ namespace PRSCapStone.Migrations
                     b.HasOne("PRSCapStone.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PRSCapStone.Models.RequestLine", b =>
+                {
+                    b.HasOne("PRSCapStone.Models.Product", "Product")
+                        .WithMany("Requestlines")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PRSCapStone.Models.Request", "Request")
+                        .WithMany("RequestLines")
+                        .HasForeignKey("RequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

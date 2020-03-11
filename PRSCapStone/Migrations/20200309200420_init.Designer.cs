@@ -9,7 +9,7 @@ using PRSCapStone.Data;
 
 namespace PRSCapStone.Migrations
 {
-    [DbContext(typeof(EdDbContext))]
+    [DbContext(typeof(CsDb))]
     [Migration("20200309200420_init")]
     partial class init
     {

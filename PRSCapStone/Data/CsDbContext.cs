@@ -3,10 +3,13 @@ using PRSCapStone.Models;
 
 namespace PRSCapStone.Data
 {
-    public class EdDbContext : DbContext
+    public class CsDb : DbContext
     {
-        public EdDbContext (DbContextOptions<EdDbContext> options)
+        public CsDb (DbContextOptions<CsDb> options)
             : base(options) {}
+
+        public CsDb() {
+        }
 
         protected override void OnModelCreating(ModelBuilder model) {
             model.Entity<User>(e => {
@@ -60,12 +63,21 @@ namespace PRSCapStone.Data
                 e.Property(x => x.Status).HasMaxLength(10).HasDefaultValue("New").IsRequired();
                 e.Property(x => x.Total).HasColumnType("decimal(11,2)").HasDefaultValue("0").IsRequired();
             });
+            model.Entity<RequestLine>(e => {
+                e.ToTable("RequestLines");
+                e.HasKey(x => x.Id);
+                e.Property(x => x.Quantity).HasDefaultValue(1);
+                e.HasOne(x => x.Request).WithMany(x => x.RequestLines).HasForeignKey(x => x.RequestId);
+                e.HasOne(x => x.Product).WithMany(x => x.Requestlines).HasForeignKey(x => x.ProductId);
+            });
+
+
 
         }
         public DbSet<PRSCapStone.Models.User> User { get; set; }
         public DbSet<PRSCapStone.Models.Vendor> Vendor { get; set; }
         public DbSet<PRSCapStone.Models.Product> Product { get; set; }
         public DbSet<PRSCapStone.Models.Request> Request { get; set; }
-
+        public DbSet<PRSCapStone.Models.RequestLine> RequestLine { get; set; }
     }
 }

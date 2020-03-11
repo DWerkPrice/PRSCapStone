@@ -14,9 +14,9 @@ namespace PRSCapStone.Controllers
     [ApiController]
     public class VendorsController : ControllerBase
     {
-        private readonly EdDbContext _context;
+        private readonly CsDb _context;
 
-        public VendorsController(EdDbContext context)
+        public VendorsController(CsDb context)
         {
             _context = context;
         }

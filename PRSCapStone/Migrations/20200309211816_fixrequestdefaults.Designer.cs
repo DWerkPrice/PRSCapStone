@@ -9,7 +9,7 @@ using PRSCapStone.Data;
 
 namespace PRSCapStone.Migrations
 {
-    [DbContext(typeof(EdDbContext))]
+    [DbContext(typeof(CsDb))]
     [Migration("20200309211816_fixrequestdefaults")]
     partial class fixrequestdefaults
     {

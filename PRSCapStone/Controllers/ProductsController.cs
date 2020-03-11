@@ -14,9 +14,9 @@ namespace PRSCapStone.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly EdDbContext _context;
+        private readonly CsDb _context;
 
-        public ProductsController(EdDbContext context)
+        public ProductsController(CsDb context)
         {
             _context = context;
         }

@@ -18,6 +18,10 @@ namespace PRSCapStone.Models
         public bool IsReviewer { get; set; }
         public bool IsAdmin { get; set; }
 
-        public User() {}
+        public override string ToString() => $"{Id}/{Username}/{Password}/{Firstname}/{Lastname}/{Phone}/{IsReviewer}/{IsAdmin}";
+
+//        public virtual List<Request> Requests { get; set; }
+
+        public User() { }
     }
 }

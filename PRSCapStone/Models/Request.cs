@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PRSCapStone.Models
@@ -18,8 +19,7 @@ namespace PRSCapStone.Models
 
         public virtual User User { get; set; }
 
-        public virtual List<RequestLine> RequestLines { get; set; }
+        internal virtual List<RequestLine> RequestLines { get; set; }
 
-        public Request() {  }
     }
 }

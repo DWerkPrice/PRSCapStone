@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PRSCapStone.Models
@@ -15,12 +16,14 @@ namespace PRSCapStone.Models
         public string PhotoPath { get; set; }
         public int? VendorId { get; set; }
 
-        public virtual Vendor Vendor { get; set; }
+        public override string ToString() => $"{Id}/{PartNbr}/{Name}/{Price}/{Unit}/{PhotoPath}/{VendorId}";
 
+
+        [JsonIgnore]
         public virtual List<RequestLine> Requestlines {get; set;}
 
 
-        
+        public virtual Vendor Vendor { get; set; }
 
-    }
+}
 }

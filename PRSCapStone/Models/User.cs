@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace PRSCapStone.Models
 {
-    public class User
-    {
+    public class User {
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
@@ -18,9 +17,8 @@ namespace PRSCapStone.Models
         public bool IsReviewer { get; set; }
         public bool IsAdmin { get; set; }
 
-        public override string ToString() => $"{Id}/{Username}/{Password}/{Firstname}/{Lastname}/{Phone}/{IsReviewer}/{IsAdmin}";
-
-//        public virtual List<Request> Requests { get; set; }
+        [JsonIgnore]
+        public virtual List<Request> Requests { get; set; }
 
         public User() { }
     }

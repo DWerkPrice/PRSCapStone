@@ -38,7 +38,7 @@ namespace PRSCapStone
             });
             services.AddCors(option =>
                 option.AddPolicy(DefaultCorsPolicy , x =>
-                    x.WithOrigins(AllowOrigins).WithMethods(AllowMethods).AllowAnyHeader()
+                    x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
                 )
              );
         }
@@ -50,6 +50,8 @@ namespace PRSCapStone
             }
 
             app.UseRouting();
+
+            app.UseCors(DefaultCorsPolicy);
 
             app.UseAuthorization();
 

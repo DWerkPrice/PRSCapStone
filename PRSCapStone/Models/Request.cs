@@ -16,7 +16,7 @@ namespace PRSCapStone.Models
         public string Status { get; set; }
         public decimal Total { get; set; }
         public int UserId { get; set; }
-
+       
         public virtual User User { get; set; }
 
         internal virtual List<RequestLine> RequestLines { get; set; }
